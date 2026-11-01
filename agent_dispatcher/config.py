@@ -112,3 +112,4 @@ MODEL_CATALOG: Dict[str, Dict[str, Any]] = {
         "description": "Elite coding and reasoning model for mission-critical tasks."
     }
 }
+

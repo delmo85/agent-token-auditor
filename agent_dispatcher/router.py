@@ -131,7 +131,7 @@ def call_openrouter_ai(
     endpoint = f"{OPENROUTER_BASE_URL}/chat/completions"
     headers = {
         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "HTTP-Referer": "https://github.com/delmo85/antigravity-token-auditor",
+        "HTTP-Referer": "https://github.com/delmo85/agent-token-auditor",
         "X-Title": "Antigravity Token Auditor & Dispatcher",
         "Content-Type": "application/json"
     }
@@ -233,3 +233,4 @@ def call_routed_ai(
     if not resp.startswith("[OPENROUTER ERROR]"):
         save_to_cache(cache_key, resp, target_model, tool_name)
     return resp
+

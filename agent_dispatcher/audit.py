@@ -256,3 +256,4 @@ def save_to_cache(cache_key: str, response: str, model: str, tool_name: str):
         logger.info(f"[CACHE SAVED] Response saved to cache (key: {cache_key[:8]}...)")
     except Exception as e:
         logger.warning(f"Error saving to cache: {e}")
+

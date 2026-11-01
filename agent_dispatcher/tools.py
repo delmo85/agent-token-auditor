@@ -355,3 +355,4 @@ def check_local_ai_health() -> str:
         }
 
     return json.dumps(result, indent=2, ensure_ascii=False)
+

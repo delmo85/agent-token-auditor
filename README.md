@@ -1,58 +1,74 @@
-# 📊 Antigravity Token Auditor & FastMCP Hybrid Local AI Dispatcher
+# 📊 Universal AI Agent Token Auditor & Local LLM FastMCP Dispatcher
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Protocol: MCP](https://img.shields.io/badge/protocol-FastMCP-green.svg)](https://modelcontextprotocol.io/)
 
-A complete, lightweight toolkit to **track, audit and minimize token consumption and LLM costs** in Agentic IDEs (like **Google Antigravity**, **Cursor**, **VS Code**, **Windsurf**, and **Claude Desktop**).
+A universal, lightweight toolkit to **track, audit, and minimize token consumption and LLM costs** across agentic coding IDEs (**Cursor**, **VS Code**, **Google Antigravity**, **Windsurf**, and **Claude Desktop**) and custom Python agents.
 
 ---
 
-## 🚀 O que este projeto faz? / What does it do?
+## 🌟 Principais Recursos / Key Features
 
-1. **Auditoria de Mensagens em Tempo Real (Turn-by-Turn Auditor)**:
-   - Intercepta cada interação do agente através de hooks de ciclo de vida (`Stop` e `PostInvocation`).
-   - Analisa o transcript da conversa (prompts do usuário, respostas do modelo, raciocínio `thinking`, chamadas de ferramentas).
-   - Rastreia trocas dinâmicas de modelo (Gemini Flash, Claude Sonnet/Opus, GPT-4o, DeepSeek-R1).
-   - Calcula tokens de entrada, tokens de saída e custo estimado em USD/moeda local.
-   - Salva automaticamente em `tokens_audit.csv` e `tokens_audit.json`.
+1. **Auditoria de Mensagens em Tempo Real (Turn-by-Turn Token Tracking)**:
+   - Mede tokens de entrada (prompts), tokens de saída, raciocínio (`thinking`) e chamadas de ferramentas.
+   - Detecta trocas dinâmicas de modelo durante as conversas (Gemini Flash, Claude Sonnet/Opus, GPT-4o, DeepSeek-R1).
+   - Calcula custos reais em USD e moeda local com base em tabelas de preços transparentes.
+   - Registra dados estruturados em `tokens_audit.csv` e `tokens_audit.json`.
 
-2. **Despachante FastMCP Híbrido com IA Local (Zero-Cost Offloading)**:
-   - Servidor FastMCP que delega tarefas mecânicas (geração de DTOs, testes unitários, validação de sintaxe, boilerplate) para uma LLM local offline (ex: Qwen 2.5 Coder 7B via LM Studio ou Ollama) com **R$ 0,00 de custo**.
-   - Roteamento híbrido inteligente: fallback automático para OpenRouter (free tier ou modelos avançados como DeepSeek-R1) caso a IA local esteja offline ou a tarefa exija raciocínio profundo.
-   - Mede e compara a economia exata de tokens e dólares contra modelos como Claude 3.5 Sonnet e GPT-4o.
+2. **Despachante FastMCP Híbrido com IA Local (Zero-Cost Local AI Offloading)**:
+   - Servidor FastMCP padrão que delega tarefas rotineiras de código (DTOs, testes unitários, validação de sintaxe, boilerplate) para uma LLM local offline (ex: **Qwen 2.5 Coder 7B** no LM Studio ou Ollama) com **custo zero ($0.00)**.
+   - Roteamento híbrido inteligente com fallback automático para OpenRouter (free tier ou modelos avançados).
+   - Compara a economia real gerada contra modelos pagos (Claude 3.5 Sonnet, GPT-4o).
+
+3. **Compatibilidade Ampla (Universal Compatibility)**:
+   - Funciona via protocolo aberto FastMCP em **qualquer IDE ou cliente compatível com MCP**.
+   - Inclui automação por hooks nativos para o **Google Antigravity**, suporte a **Cursor**, **VS Code** (Cline / Roo Code), **Claude Desktop**, e modo **CLI / Scripts Python**.
+
+---
+
+## 📖 Exemplos Práticos / Practical Examples
+
+Consulte o arquivo dedicado com exemplos passo a passo para cada ambiente:
+👉 **[Ver Guia Completo de Exemplos (EXAMPLES.md)](EXAMPLES.md)**
+
+- **Exemplo 1:** Auditoria automática por turno no Google Antigravity
+- **Exemplo 2:** Uso do servidor FastMCP no Cursor IDE
+- **Exemplo 3:** Delegação de testes e código no VS Code (Cline / Roo Code)
+- **Exemplo 4:** Telemetria de tokens no Claude Desktop
+- **Exemplo 5:** Relatórios e métricas via CLI no terminal
+- **Exemplo 6:** Integração programática em agentes Python (LangChain, CrewAI, LiteLLM)
 
 ---
 
 ## ❓ Perguntas Frequentes / FAQ
 
-### 1. Ele funciona em qualquer IDE?
-- **O Despachante FastMCP (`server.py`)**: **SIM! Funciona em QUALQUER IDE ou cliente compatível com o protocolo MCP (Model Context Protocol)**:
-  - **Google Antigravity**
+### Ele funciona em qualquer IDE?
+- **O Servidor FastMCP (`server.py`)**: **SIM! Funciona em qualquer IDE ou cliente compatível com o protocolo MCP**:
   - **Cursor**
-  - **VS Code** (com extensões Cline, Roo Code, GitHub Copilot Agent)
+  - **VS Code** (via extensões Cline, Roo Code, Copilot Agent)
+  - **Google Antigravity**
   - **Windsurf**
   - **Zed**
   - **Claude Desktop**
-- **O Hook de Auditoria Automática Turn-by-Turn (`hooks.json`)**:
-  - O gatilho automático via hook é nativo do **Google Antigravity IDE** (que dispara scripts nos eventos de ciclo de vida do agente).
-  - No entanto, o script auditor (`scripts/log_iteration_tokens.py`) também funciona via **linha de comando manual** (`--sync`), podendo ler transcripts de conversas ou ser chamado por hooks equivalentes de outros agentes (ex: Claude Code CLI, Aider, scripts de CI).
+- **O Hook Automático por Turno (`hooks.json`)**:
+  - A execução transparente a cada mensagem é suportada nativamente no **Google Antigravity IDE** através de lifecycle hooks.
+  - Para outros ambientes, o script `scripts/log_iteration_tokens.py` pode ser executado via CLI (`--sync`), integrado a webhooks ou chamado dentro do seu loop de agente em Python.
 
-### 2. Quais são os pré-requisitos para usar?
+### Quais são os pré-requisitos?
 - **Python 3.10 ou superior** (recomendado Python 3.12).
-- Dependências Python: `pip install -r requirements.txt` (`mcp`, `httpx`, `python-dotenv`).
+- Dependências: `pip install -r requirements.txt` (`mcp`, `httpx`, `python-dotenv`).
 - **Para IA Local (opcional, para custo zero)**:
-  - Qualquer servidor de inferência compatível com a API da OpenAI rodando localmente na porta 1234 ou 11434 (ex: [LM Studio](https://lmstudio.ai/) ou [Ollama](https://ollama.com/)).
-  - Modelo recomendado: `Qwen 2.5 Coder 7B Instruct` ou `14B`.
+  - [LM Studio](https://lmstudio.ai/) ou [Ollama](https://ollama.com/) rodando localmente na porta `1234` ou `11434` (modelo sugerido: `Qwen 2.5 Coder 7B Instruct` ou `14B`).
 - **Para fallback em nuvem (opcional)**:
-  - Uma chave gratuita do [OpenRouter](https://openrouter.ai/) em `OPENROUTER_API_KEY`.
+  - Chave de API da [OpenRouter](https://openrouter.ai/) em `OPENROUTER_API_KEY`.
 
 ---
 
 ## 📁 Estrutura do Projeto / Project Structure
 
 ```text
-antigravity-token-auditor/
+agent-token-auditor/
 ├── .agents/
 │   ├── hooks.json              # Configuração de hooks do Antigravity
 │   ├── run_auditor.cmd         # Script de execução para Windows
@@ -61,17 +77,18 @@ antigravity-token-auditor/
 │   ├── __init__.py
 │   ├── __main__.py
 │   ├── config.py               # Catálogo de modelos, preços e configurações
-│   ├── router.py               # Roteamento inteligente (Local vs OpenRouter)
+│   ├── router.py               # Roteador híbrido (Local vs OpenRouter)
 │   ├── audit.py                # Gravação de métricas, cache e teto de gastos
 │   └── tools.py                # Ferramentas expostas via FastMCP (@mcp.tool)
 ├── scripts/
-│   ├── log_iteration_tokens.py # Auditor de transcript disparado pelo hook
+│   ├── log_iteration_tokens.py # Auditor de transcripts disparado por hook ou CLI
 │   ├── measure_tokens.py       # CLI para visualizar consumo e custos de sessões
 │   └── generate_savings_report.py # Gerador de relatório de economia em Markdown
 ├── .env.example                # Variáveis de ambiente de exemplo
 ├── .gitignore                  # Ignora dados sensíveis e CSVs com prompts
 ├── requirements.txt            # Dependências Python
 ├── server.py                   # Ponto de entrada do servidor FastMCP
+├── EXAMPLES.md                 # Exemplos detalhados de uso em várias IDEs
 ├── LICENSE                     # Licença MIT
 └── README.md
 ```
@@ -83,17 +100,19 @@ antigravity-token-auditor/
 ### Passo 1: Clonar o repositório e instalar dependências
 
 ```bash
-git clone https://github.com/delmo85/antigravity-token-auditor.git
-cd antigravity-token-auditor
+git clone https://github.com/delmo85/agent-token-auditor.git
+cd agent-token-auditor
 
 # Criar ambiente virtual (opcional)
 python -m venv .venv
+
+# Ativar ambiente virtual:
 # Windows:
 .venv\Scripts\activate
 # Linux/macOS:
 source .venv/bin/activate
 
-# Instalar bibliotecas
+# Instalar dependências
 pip install -r requirements.txt
 
 # Configurar variáveis de ambiente
@@ -102,78 +121,30 @@ cp .env.example .env
 
 ---
 
-### Passo 2: Configurar a Auditoria no Google Antigravity
-
-Se você utiliza o **Google Antigravity**:
-
-1. Copie a pasta `.agents/` e a pasta `scripts/` para a raiz do seu projeto que você abre no Antigravity.
-2. Certifique-se de que o arquivo `.agents/hooks.json` contém:
-```json
-{
-  "token-auditor": {
-    "enabled": true,
-    "Stop": [
-      {
-        "type": "command",
-        "command": "run_auditor.cmd",
-        "timeout": 15
-      }
-    ],
-    "PostInvocation": [
-      {
-        "type": "command",
-        "command": "run_auditor.cmd",
-        "timeout": 15
-      }
-    ]
-  }
-}
-```
-*(No Linux ou macOS, substitua `run_auditor.cmd` por `run_auditor.sh`).*
-
-3. **Pronto!** A cada mensagem ou turno do agente, o hook será disparado automaticamente e criará os arquivos:
-   - `tokens_audit.csv`: Planilha tabular com data, modelo, tokens in/out, custo estimado e resumo do prompt.
-   - `tokens_audit.json`: Histórico estruturado em JSON para dashboards.
-
----
-
-### Passo 3: Configurar o Servidor FastMCP nas suas IDEs
+### Passo 2: Configurar o Servidor FastMCP nas suas IDEs
 
 O FastMCP expõe ferramentas de codificação local e relatórios de tokens.
 
-#### No Google Antigravity
-Adicione ao arquivo `.antigravity/mcp.json` ou configure nas ferramentas do Antigravity:
+#### No Cursor (`~/.cursor/mcp.json`)
 ```json
 {
   "mcpServers": {
-    "local-ai-dispatcher": {
+    "local-dispatcher": {
       "command": "python",
-      "args": ["/caminho/absoluto/antigravity-token-auditor/server.py"]
+      "args": ["/caminho/absoluto/agent-token-auditor/server.py"]
     }
   }
 }
 ```
 
-#### No Cursor (`~/.cursor/mcp.json` ou Configurações do Cursor)
-```json
-{
-  "mcpServers": {
-    "local-ai-dispatcher": {
-      "command": "python",
-      "args": ["/caminho/absoluto/antigravity-token-auditor/server.py"]
-    }
-  }
-}
-```
-
-#### No VS Code (com extensão Cline ou Roo Code)
+#### No VS Code (Cline ou Roo Code)
 Adicione em `cline_mcp_settings.json`:
 ```json
 {
   "mcpServers": {
-    "local-ai-dispatcher": {
+    "local-dispatcher": {
       "command": "python",
-      "args": ["/caminho/absoluto/antigravity-token-auditor/server.py"]
+      "args": ["/caminho/absoluto/agent-token-auditor/server.py"]
     }
   }
 }
@@ -183,23 +154,26 @@ Adicione em `cline_mcp_settings.json`:
 ```json
 {
   "mcpServers": {
-    "local-ai-dispatcher": {
+    "local-dispatcher": {
       "command": "python",
-      "args": ["/caminho/absoluto/antigravity-token-auditor/server.py"]
+      "args": ["/caminho/absoluto/agent-token-auditor/server.py"]
     }
   }
 }
 ```
 
+#### No Google Antigravity
+Copie as pastas `.agents/` e `scripts/` para o seu projeto e configure o MCP em `.antigravity/mcp.json`.
+
 ---
 
-## 💻 Ferramentas CLI Disponíveis
+## 💻 Comandos CLI Disponíveis
 
 ### 1. Medir consumo e custos da sessão atual
 ```bash
 python scripts/measure_tokens.py
 ```
-*Exibe um resumo detalhado no terminal com total de tokens gastos em nuvem, tarefas executadas na IA local e a comparação de custo contra Claude Sonnet / GPT-4o.*
+*Exibe um resumo detalhado no terminal com total de tokens gastos em nuvem, tarefas executadas na IA local e a comparação de custo contra Claude Sonnet e GPT-4o.*
 
 ### 2. Gerar relatório de economia em Markdown
 ```bash

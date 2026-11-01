@@ -5,3 +5,4 @@ if command -v python3 &>/dev/null; then
 else
     python "$SCRIPT_DIR/log_iteration_tokens.py"
 fi
+

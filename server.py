@@ -15,3 +15,4 @@ from agent_dispatcher import mcp, logger
 if __name__ == "__main__":
     logger.info("Starting Local AI & Token Auditor FastMCP Server via stdio...")
     mcp.run(transport="stdio")
+
