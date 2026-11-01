@@ -1,0 +1,19 @@
+{
+  "token-auditor": {
+    "enabled": true,
+    "Stop": [
+      {
+        "type": "command",
+        "command": "run_auditor.cmd",
+        "timeout": 15
+      }
+    ],
+    "PostInvocation": [
+      {
+        "type": "command",
+        "command": "run_auditor.cmd",
+        "timeout": 15
+      }
+    ]
+  }
+}

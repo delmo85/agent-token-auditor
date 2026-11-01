@@ -1,0 +1,25 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Environment files
+.env
+*.env.local
+
+# Generated audit data (preserve privacy of prompts)
+tokens_audit.csv
+tokens_audit.json
+local_ai_audit.csv
+local_ai_audit.json
+.agents/local_ai_metrics.json
+.agents/ai_budget.json
+.agents/cache/
+docs/reports/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
